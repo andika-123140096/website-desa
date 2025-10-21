@@ -1,15 +1,15 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { formatRole } from '../utils/formatters';
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../contexts/AuthContext"
+import { formatRole } from "../utils/formatters"
 
 export function Navbar() {
-  const { isAuthenticated, user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+    logout()
+    navigate("/")
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -40,12 +40,16 @@ export function Navbar() {
                     Pengaduan
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
-                    <li><Link className="dropdown-item" to="/pengaduan-masyarakat/login">
-                      Login
-                    </Link></li>
-                    <li><Link className="dropdown-item" to="/pengaduan-masyarakat/registrasi">
-                      Registrasi
-                    </Link></li>
+                    <li>
+                      <Link className="dropdown-item" to="/pengaduan-masyarakat/login">
+                        Login
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/pengaduan-masyarakat/registrasi">
+                        Registrasi
+                      </Link>
+                    </li>
                   </ul>
                 </li>
                 <li className="nav-item dropdown">
@@ -53,12 +57,16 @@ export function Navbar() {
                     PBB
                   </a>
                   <ul className="dropdown-menu dropdown-menu-end">
-                    <li><Link className="dropdown-item" to="/pengelolaan-pbb/login">
-                      Login
-                    </Link></li>
-                    <li><Link className="dropdown-item" to="/pengelolaan-pbb/registrasi">
-                      Registrasi
-                    </Link></li>
+                    <li>
+                      <Link className="dropdown-item" to="/pengelolaan-pbb/login">
+                        Login
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/pengelolaan-pbb/registrasi">
+                        Registrasi
+                      </Link>
+                    </li>
                   </ul>
                 </li>
               </>
@@ -70,11 +78,13 @@ export function Navbar() {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <span className="dropdown-item-text small">
-                      <strong>Role:</strong> {formatRole(user?.roles || '')}
+                      <strong>Role:</strong> {formatRole(user?.roles || "")}
                     </span>
                   </li>
-                  <li><hr className="dropdown-divider" /></li>
-                  {user?.roles === 'superadmin' && (
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  {user?.roles === "superadmin" && (
                     <>
                       <li>
                         <Link className="dropdown-item" to="/pengaduan-masyarakat/dashboard-superadmin">
@@ -86,37 +96,45 @@ export function Navbar() {
                           Dashboard PBB
                         </Link>
                       </li>
-                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
                     </>
                   )}
-                  {user?.roles === 'masyarakat' && (
+                  {user?.roles === "masyarakat" && (
                     <>
                       <li>
                         <Link className="dropdown-item" to="/pengaduan-masyarakat/dashboard-masyarakat">
                           Dashboard Saya
                         </Link>
                       </li>
-                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
                     </>
                   )}
-                  {user?.roles === 'kepala_dusun' && (
+                  {user?.roles === "kepala_dusun" && (
                     <>
                       <li>
                         <Link className="dropdown-item" to="/pengelolaan-pbb/dashboard-kepala-dusun">
                           Dashboard Kepala Dusun
                         </Link>
                       </li>
-                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
                     </>
                   )}
-                  {user?.roles === 'ketua_rt' && (
+                  {user?.roles === "ketua_rt" && (
                     <>
                       <li>
                         <Link className="dropdown-item" to="/pengelolaan-pbb/dashboard-ketua-rt">
                           Dashboard Ketua RT
                         </Link>
                       </li>
-                      <li><hr className="dropdown-divider" /></li>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
                     </>
                   )}
                   <li>
@@ -131,5 +149,5 @@ export function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

@@ -1,42 +1,43 @@
-import { useState } from 'react';
+import { useState } from "react"
+import { formatStatusPembayaran, getStatusPembayaranColor } from "../utils/formatters"
 
 interface PembayaranPBB {
-  nomor_objek_pajak: string;
-  nama_wajib_pajak: string;
-  alamat_objek_pajak: string;
-  tahun_pajak: number;
-  jumlah_pajak_terhutang: number;
-  status_pembayaran: string;
-  nama_dusun: string;
+  nomor_objek_pajak: string
+  nama_wajib_pajak: string
+  alamat_objek_pajak: string
+  tahun_pajak: number
+  jumlah_pajak_terhutang: number
+  status_pembayaran: string
+  nama_dusun: string
 }
 
 export function CekPembayaran() {
-  const [nomorObjekPajak, setNomorObjekPajak] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [data, setData] = useState<PembayaranPBB | null>(null);
+  const [nomorObjekPajak, setNomorObjekPajak] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+  const [data, setData] = useState<PembayaranPBB | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setData(null);
+    e.preventDefault()
+    setLoading(true)
+    setError("")
+    setData(null)
 
     try {
-      const response = await fetch(`/api/cek-pembayaran/${nomorObjekPajak}`);
-      const result = await response.json();
+      const response = await fetch(`/api/cek-pembayaran/${nomorObjekPajak}`)
+      const result = await response.json()
 
       if (!response.ok) {
-        throw new Error(result.error || 'Terjadi kesalahan');
+        throw new Error(result.error || "Terjadi kesalahan")
       }
 
-      setData(result);
+      setData(result)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Terjadi kesalahan');
+      setError(err instanceof Error ? err.message : "Terjadi kesalahan")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <div className="row justify-content-center">
@@ -59,13 +60,11 @@ export function CekPembayaran() {
                 />
               </div>
               <button type="submit" className="btn btn-primary" disabled={loading}>
-                {loading ? 'Mencari...' : 'Cek Status'}
+                {loading ? "Mencari..." : "Cek Status"}
               </button>
             </form>
 
-            {error && (
-              <div className="alert alert-danger mt-3">{error}</div>
-            )}
+            {error && <div className="alert alert-danger mt-3">{error}</div>}
 
             {data && (
               <div className="mt-4">
@@ -94,18 +93,12 @@ export function CekPembayaran() {
                     </tr>
                     <tr>
                       <th>Jumlah Pajak</th>
-                      <td>Rp {Number(data.jumlah_pajak_terhutang).toLocaleString('id-ID')}</td>
+                      <td>Rp {Number(data.jumlah_pajak_terhutang).toLocaleString("id-ID")}</td>
                     </tr>
                     <tr>
                       <th>Status Pembayaran</th>
                       <td>
-                        <span className={`badge ${
-                          data.status_pembayaran === 'bayar_sendiri_di_bank' || data.status_pembayaran === 'bayar_lewat_perangkat_desa' 
-                            ? 'bg-success' 
-                            : 'bg-warning'
-                        }`}>
-                          {data.status_pembayaran.replace(/_/g, ' ').toUpperCase()}
-                        </span>
+                        <span className={`badge bg-${getStatusPembayaranColor(data.status_pembayaran)}`}>{formatStatusPembayaran(data.status_pembayaran)}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -116,5 +109,5 @@ export function CekPembayaran() {
         </div>
       </div>
     </div>
-  );
+  )
 }

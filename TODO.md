@@ -418,11 +418,7 @@ In `src/worker/routes/auth.ts` - login endpoint:
 
 ```typescript
 // Fetch perangkat info
-const perangkat = await c.env.DB.prepare(
-  "SELECT id_dusun FROM perangkat_desa WHERE id = ?"
-)
-  .bind(user.id)
-  .first();
+const perangkat = await c.env.DB.prepare("SELECT id_dusun FROM perangkat_desa WHERE id = ?").bind(user.id).first()
 
 // Include in JWT
 const token = await signJWT({
@@ -430,7 +426,7 @@ const token = await signJWT({
   username: user.username,
   roles: user.roles,
   id_dusun: perangkat?.id_dusun || null, // ← Add this
-});
+})
 ```
 
 Then frontend uses `user.id_dusun` directly, no extra API call needed.
@@ -443,13 +439,13 @@ Comment out dusun info fetch, hardcode for testing:
 // In DashboardKepalaDusun.tsx
 useEffect(() => {
   // Temporary: Skip API call
-  setDusunId(1); // Hardcode Dusun Melati
+  setDusunId(1) // Hardcode Dusun Melati
   setDusunInfo({
     id: 1,
     nama_dusun: "Dusun Melati",
     status_data_pbb: "lengkap",
-  });
-}, []);
+  })
+}, [])
 ```
 
 This will at least show Ketua RT list while debugging backend.

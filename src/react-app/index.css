@@ -11,9 +11,9 @@
   --dark-text: #343a40;
   --border-color: #dee2e6;
   --border-radius: 4px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.08);
-  --shadow-lg: 0 4px 16px rgba(0,0,0,0.1);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -22,8 +22,18 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,7 +45,7 @@ body {
 /* Navbar Custom Styling */
 .navbar {
   background-color: #fff !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,.04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   padding: 0.75rem 0;
   border-bottom: 1px solid var(--border-color);
 }
@@ -214,14 +224,18 @@ main {
 }
 
 /* Form Styling */
-.form-control, .form-select {
+.form-control,
+.form-select {
   border-radius: 8px;
   border: 2px solid #e9ecef;
   padding: 0.75rem 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.15);
 }
@@ -311,7 +325,7 @@ main {
   .dashboard-header {
     padding: 0.75rem 1rem;
   }
-  
+
   .dashboard-header h2 {
     font-size: 1.25rem;
   }
@@ -368,7 +382,7 @@ main {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .table-container {
     margin-left: -1rem;
     margin-right: -1rem;
