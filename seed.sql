@@ -1,5 +1,5 @@
 -- Seed data for database
--- Password hash for "password123" using SHA-256: 482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc
+-- Password hash for "password123" using SHA-256: ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f
 
 -- Insert dusun data
 INSERT INTO dusun (id, nama_dusun, status_data_pbb) VALUES
@@ -9,12 +9,12 @@ INSERT INTO dusun (id, nama_dusun, status_data_pbb) VALUES
 
 -- Insert pengguna data
 INSERT INTO pengguna (id, nama_lengkap, username, password, roles) VALUES
-('user-superadmin', 'Admin Super', 'admin', '482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc', 'superadmin'),
-('user-kepala-dusun-1', 'Kepala Dusun A', 'kepala_dusun', '482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc', 'kepala_dusun'),
-('user-ketua-rt-1', 'Ketua RT A', 'ketua_rt', '482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc', 'ketua_rt'),
-('user-masyarakat-1', 'Masyarakat Satu', 'masyarakat1', '482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc', 'masyarakat'),
-('user-masyarakat-2', 'Masyarakat Dua', 'masyarakat2', '482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc', 'masyarakat'),
-('user-perangkat-2', 'Perangkat Dusun B', 'perangkat_b', '482c811da5d5b4bc6d497ffa98491e38df91745d17f8d27b2e4d1db0c1050d8dc', 'kepala_dusun');
+('user-superadmin', 'Admin Super', 'admin', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'superadmin'),
+('user-kepala-dusun-1', 'Kepala Dusun A', 'kepala_dusun', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'kepala_dusun'),
+('user-ketua-rt-1', 'Ketua RT A', 'ketua_rt', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'ketua_rt'),
+('user-masyarakat-1', 'Masyarakat Satu', 'masyarakat1', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'masyarakat'),
+('user-masyarakat-2', 'Masyarakat Dua', 'masyarakat2', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'masyarakat'),
+('user-perangkat-2', 'Perangkat Dusun B', 'perangkat_b', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'kepala_dusun');
 
 -- Insert perangkat_desa data
 INSERT INTO perangkat_desa (id, jabatan, id_dusun) VALUES
