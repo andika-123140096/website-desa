@@ -898,37 +898,44 @@ export function DashboardAdminPBB() {
           <div className="mb-3">
             <input type="text" className="form-control" placeholder="Cari dusun..." value={searchDusun} onChange={(e) => setSearchDusun(e.target.value)} />
           </div>
-          <div className="table-container mx-auto" style={{ maxHeight: "500px", overflowY: "auto", maxWidth: "100%" }}>
-            <table className="table table-hover">
-              <thead className="table-light" style={{ position: "sticky", top: 0, zIndex: 1 }}>
-                <tr>
-                  <th>Nama Dusun</th>
-                  <th>Kepala Dusun</th>
-                  <th>Total Perangkat Desa</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredDusun.map((d) => (
-                  <tr key={d.id}>
-                    <td>{d.nama_dusun}</td>
-                    <td>{d.nama_kepala_dusun || "Belum ada"}</td>
-                    <td>
-                      <span className="badge bg-info">
-                        <i className="bi bi-people me-1"></i>
-                        {d.total_perangkat_desa || 0} Orang
-                      </span>
-                    </td>
-                    <td>
-                      <button className="btn btn-sm btn-primary" onClick={() => openDusunDetail(d.id)}>
-                        <i className="bi bi-eye me-1"></i>Lihat Detail
-                      </button>
-                    </td>
+          {filteredDusun.length === 0 ? (
+            <div className="p-4 text-center text-muted">
+              <i className="bi bi-inbox" style={{ fontSize: "3rem", opacity: 0.3 }}></i>
+              <p className="mt-2 mb-0">{searchDusun ? "Tidak ada dusun yang cocok dengan pencarian" : "Belum ada dusun yang terdaftar"}</p>
+            </div>
+          ) : (
+            <div className="table-container mx-auto" style={{ maxHeight: "500px", overflowY: "auto", maxWidth: "100%" }}>
+              <table className="table table-hover">
+                <thead className="table-light" style={{ position: "sticky", top: 0, zIndex: 1 }}>
+                  <tr>
+                    <th>Nama Dusun</th>
+                    <th>Kepala Dusun</th>
+                    <th>Total Perangkat Desa</th>
+                    <th>Aksi</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {filteredDusun.map((d) => (
+                    <tr key={d.id}>
+                      <td>{d.nama_dusun}</td>
+                      <td>{d.nama_kepala_dusun || "Belum ada"}</td>
+                      <td>
+                        <span className="badge bg-info">
+                          <i className="bi bi-people me-1"></i>
+                          {d.total_perangkat_desa || 0} Orang
+                        </span>
+                      </td>
+                      <td>
+                        <button className="btn btn-sm btn-primary" onClick={() => openDusunDetail(d.id)}>
+                          <i className="bi bi-eye me-1"></i>Lihat Detail
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </>
       )}
 
@@ -1096,84 +1103,91 @@ export function DashboardAdminPBB() {
           <div className="mb-3">
             <input type="text" className="form-control" placeholder="Cari statistik dusun..." value={searchStatistik} onChange={(e) => setSearchStatistik(e.target.value)} />
           </div>
-          <div className="table-container mx-auto" style={{ maxHeight: "500px", overflowY: "auto", maxWidth: "100%" }}>
-            <table className="table table-hover">
-              <thead className="table-light" style={{ position: "sticky", top: 0, zIndex: 1 }}>
-                <tr>
-                  <th>Nama Dusun</th>
-                  <th>Total Surat</th>
-                  <th>Status Data PBB</th>
-                  <th>Persentase</th>
-                  <th>Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredStatistik.map((stat) => (
-                  <tr key={stat.id} style={{ cursor: "pointer" }}>
-                    <td>{stat.nama_dusun}</td>
-                    <td>
-                      <span className="badge bg-info">
-                        <i className="bi bi-file-text me-1"></i>
-                        {stat.total_surat || 0}
-                      </span>
-                    </td>
-                    <td>
-                      <span className={`badge bg-${getStatusDataPBBColor(stat.status_data_pbb || "belum_lengkap")}`}>
-                        {formatStatusDataPBB(stat.status_data_pbb || "belum_lengkap")}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <div className="progress flex-grow-1 me-2" style={{ height: "20px", minWidth: "80px" }}>
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: `${stat.persentase_pembayaran || 0}%` }}
-                            aria-valuenow={stat.persentase_pembayaran || 0}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                          >
-                            {(stat.persentase_pembayaran || 0).toFixed(1)}%
+          {filteredStatistik.length === 0 ? (
+            <div className="p-4 text-center text-muted">
+              <i className="bi bi-inbox" style={{ fontSize: "3rem", opacity: 0.3 }}></i>
+              <p className="mt-2 mb-0">{searchStatistik ? "Tidak ada statistik dusun yang cocok dengan pencarian" : "Belum ada data statistik dusun"}</p>
+            </div>
+          ) : (
+            <div className="table-container mx-auto" style={{ maxHeight: "500px", overflowY: "auto", maxWidth: "100%" }}>
+              <table className="table table-hover">
+                <thead className="table-light" style={{ position: "sticky", top: 0, zIndex: 1 }}>
+                  <tr>
+                    <th>Nama Dusun</th>
+                    <th>Total Surat</th>
+                    <th>Status Data PBB</th>
+                    <th>Persentase</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredStatistik.map((stat) => (
+                    <tr key={stat.id} style={{ cursor: "pointer" }}>
+                      <td>{stat.nama_dusun}</td>
+                      <td>
+                        <span className="badge bg-info">
+                          <i className="bi bi-file-text me-1"></i>
+                          {stat.total_surat || 0}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={`badge bg-${getStatusDataPBBColor(stat.status_data_pbb || "belum_lengkap")}`}>
+                          {formatStatusDataPBB(stat.status_data_pbb || "belum_lengkap")}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <div className="progress flex-grow-1 me-2" style={{ height: "20px", minWidth: "80px" }}>
+                            <div
+                              className="progress-bar bg-success"
+                              role="progressbar"
+                              style={{ width: `${stat.persentase_pembayaran || 0}%` }}
+                              aria-valuenow={stat.persentase_pembayaran || 0}
+                              aria-valuemin={0}
+                              aria-valuemax={100}
+                            >
+                              {(stat.persentase_pembayaran || 0).toFixed(1)}%
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex align-items-center gap-2">
-                        <button
-                          className="btn btn-sm btn-primary"
-                          onClick={() => {
-                            setSelectedDusunId(stat.id.toString())
-                            setActiveTab("detail-laporan-dusun")
-                          }}
-                        >
-                          <i className="bi bi-eye me-1"></i>Detail
-                        </button>
-                        <select
-                          className="form-select form-select-sm"
-                          style={{
-                            width: "auto",
-                            minWidth: "120px",
-                            height: "31px",
-                            fontSize: "0.875rem",
-                            lineHeight: "1",
-                            paddingTop: "0.125rem",
-                            paddingBottom: "0.25rem",
-                            paddingRight: "2rem",
-                          }}
-                          value={stat.status_data_pbb || "belum_lengkap"}
-                          onChange={(e) => updateDusunStatus(stat.id, e.target.value)}
-                        >
-                          <option value="belum_lengkap">Belum Lengkap</option>
-                          <option value="sudah_lengkap">Sudah Lengkap</option>
-                        </select>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      </td>
+                      <td>
+                        <div className="d-flex align-items-center gap-2">
+                          <button
+                            className="btn btn-sm btn-primary"
+                            onClick={() => {
+                              setSelectedDusunId(stat.id.toString())
+                              setActiveTab("detail-laporan-dusun")
+                            }}
+                          >
+                            <i className="bi bi-eye me-1"></i>Detail
+                          </button>
+                          <select
+                            className="form-select form-select-sm"
+                            style={{
+                              width: "auto",
+                              minWidth: "120px",
+                              height: "31px",
+                              fontSize: "0.875rem",
+                              lineHeight: "1",
+                              paddingTop: "0.125rem",
+                              paddingBottom: "0.25rem",
+                              paddingRight: "2rem",
+                            }}
+                            value={stat.status_data_pbb || "belum_lengkap"}
+                            onChange={(e) => updateDusunStatus(stat.id, e.target.value)}
+                          >
+                            <option value="belum_lengkap">Belum Lengkap</option>
+                            <option value="sudah_lengkap">Sudah Lengkap</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       )}
 
