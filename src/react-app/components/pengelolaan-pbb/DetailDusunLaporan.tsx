@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
-import { useAuth } from "../../contexts/AuthContext"
 import { SuratPBB } from "../../types"
 import { formatStatusPembayaran, getStatusPembayaranColor } from "../../utils/formatters"
 import { formatToWIB } from "../../utils/time"
@@ -21,10 +19,13 @@ interface DusunStatistik {
   surat_pbb: SuratPBB[]
 }
 
-export function DetailDusunLaporan() {
-  const { id } = useParams<{ id: string }>()
-  const navigate = useNavigate()
-  const { token } = useAuth()
+interface DetailDusunLaporanProps {
+  dusunId: string
+  token: string
+  onBack?: () => void
+}
+
+export function DetailDusunLaporan({ dusunId, token, onBack }: DetailDusunLaporanProps) {
   const [statistik, setStatistik] = useState<DusunStatistik | null>(null)
   const [selectedSurat, setSelectedSurat] = useState<SuratPBB | null>(null)
   const [loading, setLoading] = useState(true)
@@ -46,10 +47,10 @@ export function DetailDusunLaporan() {
 
   useEffect(() => {
     const fetchStatistik = async () => {
-      if (!id) return
+      if (!dusunId) return
       try {
         setLoading(true)
-        const response = await fetch(`/api/statistik/dusun/${id}`, {
+        const response = await fetch(`/api/statistik/dusun/${dusunId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         const data = await response.json()
@@ -74,7 +75,7 @@ export function DetailDusunLaporan() {
       }
     }
     fetchStatistik()
-  }, [id, token])
+  }, [dusunId, token])
 
   const handleSuratClick = (surat: SuratPBB) => {
     setSelectedSurat(surat)
@@ -221,9 +222,11 @@ export function DetailDusunLaporan() {
               <h6 className="mb-0">
                 <i className="bi bi-file-text me-2"></i>Daftar Surat PBB
               </h6>
-              <button className="btn btn-sm btn-secondary" onClick={() => navigate(-1)}>
-                <i className="bi bi-arrow-left me-1"></i>Kembali ke Laporan
-              </button>
+              {onBack && (
+                <button className="btn btn-sm btn-secondary" onClick={onBack}>
+                  <i className="bi bi-arrow-left me-1"></i>Kembali ke Laporan
+                </button>
+              )}
             </div>
           </div>
           <div className="mb-3">
